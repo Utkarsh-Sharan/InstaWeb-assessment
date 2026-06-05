@@ -25,6 +25,13 @@ const createLead = asyncHandler(async (req, res) => {
     return res.status(201).json({message: "Lead created successfully!", lead});
 });
 
+const getAllLeads = asyncHandler(async (req, res) => {
+    const leads = await Lead.find();
+
+    return res.status(200).json({message: "Fetched all leads!", leads});
+})
+
 export {
     createLead,
+    getAllLeads,
 }
