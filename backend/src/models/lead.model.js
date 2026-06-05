@@ -21,13 +21,19 @@ const leadSchema = new Schema({
     },
     leadStatus: {
         type: String,
-        enum: ["New", "Contacted", "Qualified", "Converted", "Lost"],
-        default: "New",
+        enum: ["new", "contacted", "qualified", "converted", "lost"],
+        default: "new",
+    },
+    notes: {
+        type: String,
     },
     dateCreated: {
         type: Date,
         default: Date.now(),
     },
+},
+{
+    timestamps: true,
 });
 
 export const Lead = mongoose.model("Lead", leadSchema);
