@@ -9,6 +9,7 @@ const leadSchema = new Schema({
         type: String,
         unique: true,
         required: true,
+        index: true,
     },
     phone: {
         type: Number,
@@ -26,10 +27,6 @@ const leadSchema = new Schema({
     },
     notes: {
         type: String,
-    },
-    dateCreated: {
-        type: Date,
-        default: Date.now(),
     },
 },
 {

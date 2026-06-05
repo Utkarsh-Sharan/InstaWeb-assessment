@@ -5,7 +5,7 @@ const leadCreationValidator = () => {
         body("name")
             .trim()
             .notEmpty()
-            .withMessage("Name is required!")
+            .withMessage("Lead name is required!")
             .isLength({min: 2})
             .withMessage("Lead name must be atleast 2 characters long!"),
         body("email")
