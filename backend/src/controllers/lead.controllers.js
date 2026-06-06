@@ -5,7 +5,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 const createLead = asyncHandler(async (req, res) => {
     const {name, email, phone, companyName, leadStatus, notes} = req.body;
 
-    const leadAlreadyExists = await Lead.find({
+    const leadAlreadyExists = await Lead.findOne({
         $or: [
             {email},
             {phone},
@@ -52,8 +52,17 @@ const updateLead = asyncHandler(async (req, res) => {
     return res.status(200).json({message: "Lead updated successfully!", updatedLead});
 });
 
+const deleteLead = asyncHandler(async (req, res) => {
+    const leadId = req.leadId;
+
+    await Lead.deleteOne({_id: leadId});
+
+    return res.status(200).json({message: "Lead deleted successfully!"});
+});
+
 export {
     createLead,
     getAllLeads,
     updateLead,
+    deleteLead,
 }

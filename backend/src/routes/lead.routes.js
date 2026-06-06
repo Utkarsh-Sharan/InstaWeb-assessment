@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { 
     createLead, 
+    deleteLead, 
     getAllLeads,
     updateLead
 } from "../controllers/lead.controllers.js";
@@ -13,5 +14,6 @@ const router = Router();
 router.route("/create").post(leadCreationValidator(), validate, createLead);
 router.route("/fetch").get(getAllLeads);
 router.route("/update/:leadId").put(leadCreationValidator(), validate, verifyLead, updateLead);
+router.route("/delete/:leadId").delete(verifyLead, deleteLead);
 
 export default router;
