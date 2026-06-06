@@ -33,14 +33,8 @@ const getAllLeads = asyncHandler(async (req, res) => {
 });
 
 const updateLead = asyncHandler(async (req, res) => {
-    const {leadId} = req.params;
+    const leadId = req.leadId;
     const {name, email, phone, companyName, leadStatus, notes} = req.body;
-
-    if(!mongoose.Types.ObjectId.isValid(leadId))
-        return res.status(400).json({message: "Invalid Lead ID!"});
-    
-    const leadAlreadyExists = await Lead.findById(leadId);
-    if(!leadAlreadyExists) return res.status(404).json({message: "Lead not found!"});
 
     const updatedLead = await Lead.findOneAndUpdate(
         {_id: leadId},
@@ -52,7 +46,7 @@ const updateLead = asyncHandler(async (req, res) => {
             leadStatus,
             notes,
         }},
-        {new: true}
+        {returnDocument: "after"}
     );
 
     return res.status(200).json({message: "Lead updated successfully!", updatedLead});
