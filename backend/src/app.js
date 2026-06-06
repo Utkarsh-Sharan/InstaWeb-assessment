@@ -13,13 +13,15 @@ app.use(
     })
 );
 
+import leadRoutes from "./routes/lead.routes.js";
 
+app.use("/api/v1/lead", leadRoutes);
 
 app.use((err, req, res, next) => {
     const statusCode = err.status || 500;
 
     res.status(statusCode).json({
-        status: err.status || 500,
+        success: err.success || false,
         message: err.message || "Something went wrong",
         errors: err.errors || null,
         data: err.data || null,
